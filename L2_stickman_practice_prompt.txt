@@ -1,0 +1,517 @@
+Create a complete **Python endless runner game** using **Pygame**.
+
+## Game Concept
+
+Build a 2D side-scrolling endless runner game.
+
+The player controls a character/sprite that appears to run continuously. The character should remain approximately in the same horizontal position on the screen while the **environment, ground, and obstacles move from right to left**, creating the illusion that the character is endlessly running forward.
+
+The game should continue indefinitely until the player collides with an obstacle.
+
+## Player
+
+* Add a player character sprite.
+* The player should continuously appear to be running.
+* Keep the player near the left side/center-left of the screen.
+* The player should automatically remain on the ground when not jumping.
+* The player should **jump when the SPACE key is pressed**.
+* The player should not be able to perform unlimited jumps in the air.
+* Allow only one jump at a time.
+* Once the player lands, SPACE can be pressed again to jump.
+* Make the jump smooth and natural using velocity/gravity rather than instantly moving the player up and down.
+
+## Endless Scrolling
+
+The game should give the feeling that the player is continuously running.
+
+Instead of moving the player across the screen:
+
+* Move the ground/environment from right to left.
+* Move obstacles from right to left.
+* Spawn new obstacles from the right side of the screen.
+* Remove obstacles after they leave the left side of the screen.
+* Continuously generate new obstacles so the game can theoretically continue forever.
+
+The scrolling speed should gradually increase as the player's score increases, making the game progressively harder.
+
+## Obstacles
+
+Create multiple types of obstacles.
+
+Examples:
+
+1. **Cactus**
+
+   * Different cactus shapes/sizes.
+   * The player must jump over them.
+
+2. **Fireball**
+
+   * A fireball moving along the ground.
+   * The player must jump over it.
+
+3. **Rock**
+
+   * A rock obstacle that the player must avoid.
+
+4. **Tall obstacle**
+
+   * A taller obstacle that requires a properly timed jump.
+
+The obstacle system should be designed so that adding additional obstacle types later is easy.
+
+Randomly select obstacles while ensuring that they are reasonably spaced and that the game remains playable.
+
+## Collision
+
+Implement collision detection between the player and obstacles.
+
+If the player touches an obstacle:
+
+* Stop the game.
+* Display a **GAME OVER** screen.
+* Display the player's final score.
+* Provide an option to restart the game.
+
+Use appropriate collision rectangles/hitboxes rather than relying only on exact image boundaries.
+
+## Scoring
+
+Create a score system.
+
+* Start the score at 0.
+* Every time the player successfully passes an obstacle, increase the score by **1**.
+* Display the score prominently in the top-right corner.
+* The score should update smoothly during gameplay.
+* When the player passes an obstacle, make sure it is counted only once.
+* Optionally display a high score.
+
+The score should also influence difficulty by gradually increasing the scrolling speed.
+
+## Game States
+
+Implement clear game states:
+
+1. **Start Screen**
+
+   * Game title
+   * Short instructions
+   * "Press SPACE to Start"
+
+2. **Playing**
+
+   * Player running
+   * Obstacles spawning
+   * Scrolling environment
+   * Score displayed
+
+3. **Game Over**
+
+   * "GAME OVER"
+   * Final score
+   * High score if implemented
+   * "Press SPACE to Restart"
+
+## Visual Design
+
+Create an attractive, clean 2D game.
+
+Use:
+
+* A colorful background
+* Ground/platform
+* Player sprite
+* Multiple obstacle designs
+* Simple environmental elements such as clouds, trees, mountains, buildings, etc.
+
+If external image assets are not available, create simple graphics using Pygame shapes or generate placeholder assets so that the game remains completely playable.
+
+The visual style should feel like a polished arcade endless runner rather than a plain programming demonstration.
+
+## Animation
+
+If sprite images are used, animate the running character.
+
+The character should have at least two or more running frames.
+
+While jumping, use an appropriate jump pose if available.
+
+Obstacles can also have simple animations where appropriate, especially the fireball.
+
+## Difficulty
+
+The game should progressively become more challenging.
+
+For example:
+
+* Start with a relatively slow movement speed.
+* Gradually increase the speed as the score increases.
+* Reduce the average time available to react.
+* Continue spawning obstacles indefinitely.
+
+However, **do not make the game unfair**. The player should always have a reasonable opportunity to jump over an obstacle.
+
+Avoid generating impossible obstacle combinations.
+
+## Sound
+
+If practical, add simple sound effects:
+
+* Jump sound
+* Collision/game-over sound
+* Point/score sound
+* Optional background music
+
+If sound files are unavailable, structure the project so sound assets can easily be added later.
+
+## Code Structure
+
+Organize the project cleanly.
+
+Use classes where appropriate, for example:
+
+* `Player`
+* `Obstacle`
+* `Game`
+
+Separate responsibilities logically.
+
+Use functions for:
+
+* Handling events
+* Updating the player
+* Updating obstacles
+* Spawning obstacles
+* Collision detection
+* Drawing the game
+* Updating the score
+* Restarting the game
+
+Avoid putting the entire game into one huge function.
+
+Use constants for important settings such as:
+
+* Screen width/height
+* FPS
+* Gravity
+* Jump strength
+* Initial game speed
+* Maximum game speed
+* Spawn intervals
+
+Add useful comments explaining important sections of the code, especially the jump physics, scrolling system, obstacle spawning, scoring, and collision detection.
+
+## Project Files
+
+Create a complete runnable project with a sensible structure, for example:
+
+```text
+endless_runner/
+│
+├── main.py
+├── assets/
+│   ├── images/
+│   └── sounds/
+└── README.md
+```
+
+If assets are required, either provide suitable assets or create the game using Pygame-generated graphics so there are no missing-file errors.
+
+## Technical Requirements
+
+* Python 3
+* Pygame
+* Use a proper game loop.
+* Use `pygame.time.Clock()` and a fixed target FPS.
+* Use `clock.tick(FPS)` to control the game speed.
+* Handle keyboard events properly.
+* Use delta time or FPS-independent movement where appropriate.
+* Do not use busy loops.
+* Make sure the game runs without errors.
+
+## Important Gameplay Requirement
+
+The most important visual effect is that **the player appears to be running continuously while the world moves toward the player**.
+
+The player should NOT simply run from the left side of the screen to the right.
+
+The intended gameplay should feel similar to an endless runner:
+
+**Player stays mostly in one place → obstacles come toward player → press SPACE to jump → successfully cross obstacle → gain 1 point → game continues → speed gradually increases.**
+
+## Final Deliverable
+
+Generate all required Python code and project files.
+
+Before finishing:
+
+1. Check the code for syntax/runtime issues.
+2. Make sure the game can start from `main.py`.
+3. Make sure SPACE starts the game.
+4. Make sure SPACE makes the player jump.
+5. Make sure the player lands correctly.
+6. Make sure obstacles spawn continuously.
+7. Make sure collision causes Game Over.
+8. Make sure passing obstacles increases the score exactly once.
+9. Make sure the game can be restarted.
+10. Make sure the difficulty increases gradually.
+11. Make sure there are no missing asset errors.
+12. Include a `README.md` explaining how to install Pygame and run the game.
+
+Build the project as a **complete playable game**, not merely a demonstration of the individual mechanics.
+
+
+-----------------------------------------------------------------------------
+Modify the **existing endless runner game** rather than creating a new game from scratch.
+
+Keep all existing gameplay mechanics working unless specifically mentioned below. The goal of this update is to transform the game's visual theme and player character into a **Spider-Man-inspired superhero endless runner**.
+
+## 1. Replace the Player Character
+
+Replace the current player character with a superhero character that is clearly inspired by **Spider-Man**.
+
+The character should have:
+
+* A red and dark-blue superhero suit
+* Spider-web patterns on the suit
+* A spider emblem on the chest
+* A masked face with large white eye shapes
+* A dynamic superhero appearance rather than a simple geometric/Pygame shape
+
+The character should look appropriate for a 2D side-scrolling game.
+
+### Running Animation
+
+The character should appear to be running continuously.
+
+Use multiple animation frames if possible so the running movement looks smooth.
+
+The character should remain approximately in the same horizontal position while the environment moves from right to left, as in the existing endless-runner mechanics.
+
+## 2. Improve the Jump Animation
+
+The jumping animation is especially important.
+
+When the player presses **SPACE**, the character should perform a **Spider-Man-style superhero jump**, rather than looking like a normal character simply moving vertically.
+
+During the jump:
+
+* The character should bend his knees slightly.
+* Arms should move into a dynamic superhero pose.
+* The body should lean naturally.
+* The pose should look energetic and acrobatic.
+* When reaching the highest point of the jump, use a distinct airborne pose.
+* On the way down, transition naturally toward the landing/running pose.
+
+If sprite animation is being used, create separate animation states such as:
+
+* `RUN`
+* `JUMP`
+* `FALL`
+* `LAND`
+
+The jump should still use the existing physics/gravity system.
+
+Do **not** change the jump controls: **SPACE should remain the jump key.**
+
+## 3. New Background — New York City
+
+Replace the current background with a dramatic **American metropolitan city environment inspired by New York City**, the type of environment associated with Spider-Man.
+
+The background should contain:
+
+* Tall skyscrapers
+* Dense city buildings
+* Rooftops
+* Windows across the buildings
+* Different building heights
+* A large city skyline
+* Rooftops and architectural details
+* A distant skyline to create depth
+
+The scene should clearly communicate:
+
+**Spider-Man running and jumping through a major American city.**
+
+Avoid using recognizable copyrighted movie screenshots or artwork. Create an original superhero-style city environment inspired by the architecture and atmosphere of New York.
+
+## 4. Day/Night Atmosphere
+
+Prefer a **dramatic evening or sunset city atmosphere**.
+
+The sky can contain:
+
+* Warm sunset lighting
+* Orange/purple/blue tones
+* Clouds
+* City lights beginning to appear
+
+The buildings should have illuminated windows so the background feels alive.
+
+Alternatively, if the existing game already has a day/night system, adapt it to this theme rather than removing it.
+
+## 5. Layered Background / Parallax Effect
+
+Make the city background feel more realistic by using multiple layers.
+
+For example:
+
+**Far background**
+
+* Sky
+* Clouds
+* Distant skyline
+
+**Middle background**
+
+* Tall skyscrapers
+
+**Foreground**
+
+* Rooftops
+* Buildings closer to the player
+
+The different layers should move at different speeds to create a **parallax scrolling effect**.
+
+The foreground should move faster than the distant skyline.
+
+This should make the player feel like Spider-Man is moving rapidly through the city.
+
+## 6. Rooftop Running
+
+If appropriate for the existing game design, make the ground/platform resemble **city rooftops** rather than a generic ground surface.
+
+The player should appear to be running across rooftops while buildings move in the background.
+
+Keep the existing collision and jumping mechanics intact.
+
+## 7. Obstacles
+
+Keep the existing obstacle system, but visually redesign the obstacles so they fit the new environment.
+
+For example:
+
+* Cactus → replace with a rooftop obstacle such as an air-conditioning unit or construction barrier.
+* Rock → replace with debris or rooftop equipment.
+* Fireball → keep it only if it visually fits the superhero theme, otherwise replace it with a more appropriate obstacle.
+
+Possible obstacles:
+
+* Rooftop construction barriers
+* Water tanks
+* Air-conditioning units
+* Wooden crates
+* Construction equipment
+* Rooftop debris
+* Small gaps/raised barriers where appropriate
+
+Maintain multiple obstacle types and random spawning.
+
+## 8. Spider-Man-Themed Details
+
+Add subtle environmental details that reinforce the theme without making the game visually cluttered.
+
+Possible additions:
+
+* Spider webs between buildings
+* Water towers
+* Rooftop antennas
+* Fire escapes
+* Construction cranes
+* Neon signs
+* Birds flying in the distance
+* Occasional helicopters far in the background
+* City lights
+
+These should remain background elements and should not interfere with gameplay unless intentionally designed as obstacles.
+
+## 9. Preserve Existing Gameplay
+
+Do NOT break the existing game mechanics.
+
+The following should continue working exactly as before:
+
+* SPACE key jump
+* Gravity
+* Landing
+* Continuous running
+* Endless scrolling
+* Obstacle spawning
+* Collision detection
+* Score system
+* Increasing difficulty
+* Game Over
+* Restart
+* High score, if already implemented
+
+Only modify these mechanics if necessary to support the new animations/theme.
+
+## 10. Visual Quality
+
+The final game should feel like a polished **2D Spider-Man-inspired endless runner**, not like a basic classroom demonstration.
+
+Aim for:
+
+* Smooth animations
+* Attractive city background
+* Clear player visibility
+* Good contrast between player and background
+* Consistent art style
+* Smooth scrolling
+* Dynamic jump animation
+* Professional-looking UI
+
+Make sure the Spider-Man character remains clearly visible against the city background.
+
+## 11. Assets
+
+If the project already contains an assets folder, organize the new assets properly.
+
+For example:
+
+```text
+assets/
+├── player/
+│   ├── run1.png
+│   ├── run2.png
+│   ├── run3.png
+│   ├── jump.png
+│   ├── fall.png
+│   └── land.png
+│
+├── background/
+│   ├── sky.png
+│   ├── distant_city.png
+│   ├── city.png
+│   └── foreground_buildings.png
+│
+└── obstacles/
+    ├── rooftop_barrier.png
+    ├── water_tank.png
+    └── construction.png
+```
+
+If external assets are not available, create suitable original graphics rather than leaving missing-image placeholders.
+
+Do not use copyrighted movie screenshots, official Spider-Man movie artwork, or ripped game assets.
+
+## 12. Final Testing
+
+After implementing the changes:
+
+1. Start the game.
+2. Verify the new superhero character appears correctly.
+3. Verify the running animation works.
+4. Press SPACE and verify the character performs the new superhero-style jump.
+5. Verify the jump physics still work correctly.
+6. Verify the character lands smoothly.
+7. Verify the city background scrolls continuously.
+8. Verify the parallax effect works.
+9. Verify obstacles remain visible and functional.
+10. Verify collision detection still works.
+11. Verify the score still increases correctly.
+12. Verify Game Over still works.
+13. Verify restart still works.
+14. Check for missing assets, broken paths, syntax errors, and runtime errors.
+
+**Important:** Do not rebuild the game from scratch. Inspect the existing project first, understand its current architecture, and modify the existing files while preserving all working functionality.
